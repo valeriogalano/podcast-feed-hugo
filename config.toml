@@ -1,0 +1,21 @@
+baseURL = ""
+languageCode = "it-it"
+title = ""
+
+[params]
+    author = ""
+
+    [params.podcast]
+        title = ""
+        subtitle = ""
+        summary = ""
+        email = "example@example.com"
+        image = "/img/podcast-logo.png"
+        copyright = ""
+        category = ""
+        sub_category = ""
+        explicit = "no"
+        iTunesID = 12345677
+
+[taxonomies]
+    podcast_tag = "podcast_tag"
