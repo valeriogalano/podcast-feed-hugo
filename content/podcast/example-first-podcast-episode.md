@@ -1,4 +1,5 @@
 ---
+layout: episode
 title: "Example first podcast episode"
 subtitle: "Yay!"
 date: 2022-08-27T05:25:00+10:00

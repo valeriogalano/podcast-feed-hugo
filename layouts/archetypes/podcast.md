@@ -1,4 +1,5 @@
 ---
+layout: episode
 title: "{{ replace .TranslationBaseName "-" " " | title }}"
 subtitle: ""
 date: {{ .Date }}

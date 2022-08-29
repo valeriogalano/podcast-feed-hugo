@@ -1,0 +1,10 @@
+{{- $date := (dateFormat "02. January 2006" .Date) -}}
+<p class='post_date pale'>{{ $date }}</p>
+<h1 class='post_title'>{{ .Title }}</h1>
+<h2 class='post_subtitle'>{{ .Params.Series }}{{ .Params.podcast_tag }}</h2>
+<div class='post_content'>
+    <audio controls>
+        <source src="{{.Site.Params.podcast.audio_base_url}}{{ .Params.audio | safeHTML }}" type="audio/mpeg">
+    </audio>
+    {{ .Content }}
+</div>

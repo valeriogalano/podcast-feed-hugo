@@ -11,6 +11,7 @@ title = ""
         summary = ""
         email = "example@example.com"
         image = "/img/podcast-logo.png"
+        audio_base_url = ''
         copyright = ""
         category = ""
         sub_category = ""
