@@ -17,6 +17,8 @@ title = ""
         sub_category = ""
         explicit = "no"
         iTunesID = 12345677
+        funding_url = ""
+        funding_text = ""
 
 [taxonomies]
     podcast_tag = "podcast_tag"

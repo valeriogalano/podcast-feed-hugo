@@ -7,7 +7,8 @@
    xmlns:slash="https://purl.org/rss/1.0/modules/slash/"
    xmlns:itunes="https://www.itunes.com/dtds/podcast-1.0.dtd"
    xmlns:media="https://search.yahoo.com/mrss/"
-   xmlns:googleplay="https://www.google.com/schemas/play-podcasts/1.0">
+   xmlns:googleplay="https://www.google.com/schemas/play-podcasts/1.0"
+   xmlns:podcast="https://podcastindex.org/namespace/1.0">
   <channel>
     <title>{{ .Site.Params.Podcast.title }}</title>
     <link>{{ .Site.BaseURL }}</link>
@@ -31,6 +32,7 @@
     </itunes:category>
     <itunes:block>no</itunes:block>
     <itunes:explicit>{{ .Site.Params.Podcast.explicit }}</itunes:explicit>
+    <podcast:funding url="{{ .Site.Params.Podcast.funding_url }}">{{ .Site.Params.Podcast.funding_text }}</podcast:funding>
     <generator>Hugo -- gohugo.io</generator>
     {{- $pages := .Data.Pages -}}
     {{- $limit := .Site.Config.Services.RSS.Limit -}}
