@@ -42,7 +42,12 @@
     {{- range $pages -}}
     <item>
       <title>{{ title .Params.title }}{{ with .Params.subtitle }} ({{ . }}){{ end }}</title>
-      <itunes:author>{{ index .Params.authors 0 }}</itunes:author>
+      <itunes:author>
+        {{- range $index, $key:= .Params.authors -}}
+          {{- if $index }}, {{ end -}}
+          {{- if gt (len $key) 0 }}{{ $key }}{{ end -}}
+        {{- end -}}
+      </itunes:author>
       <itunes:summary>{{ .Summary | plainify }}</itunes:summary>
       <itunes:explicit>{{ .Params.explicit }}</itunes:explicit>
       {{- if .Params.podcast_tag -}}
