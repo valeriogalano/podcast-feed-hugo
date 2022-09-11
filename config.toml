@@ -6,19 +6,22 @@ title = ""
     author = ""
 
     [params.podcast]
-        title = ""
-        subtitle = ""
-        summary = ""
+        title = "Hugo Podcast"
+        subtitle = "Subtitle"
+        summary = "Summary"
+        authors = [ "Author" ]
         email = "example@example.com"
         image = "/img/podcast-logo.png"
-        audio_base_url = ''
-        copyright = ""
-        category = ""
-        sub_category = ""
+        audio_base_url = "https://cdn.example.com/podcast/"
+        copyright = "Copyright"
+        category = "Category"
+        sub_category = "Sub Category"
         explicit = "no"
         iTunesID = 12345677
-        funding_url = ""
-        funding_text = ""
+        update_period = "weekly"
+        update_frequency = 1
+        funding_url = "https://example.com/funding"
+        funding_text = "Buy me a coffee"
 
 [taxonomies]
     podcast_tags = "podcast_tag"
