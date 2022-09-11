@@ -21,4 +21,4 @@ title = ""
         funding_text = ""
 
 [taxonomies]
-    podcast_tag = "podcast_tag"
+    podcast_tags = "podcast_tag"

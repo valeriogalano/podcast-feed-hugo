@@ -9,7 +9,7 @@ audio_size: 14076118
 authors: ["Author Name"]
 images: ["/img/example-first-episode-image.jpg"]
 series: ["My Podcast"]
-podcast_tag: ["tag 1", "tag 2"]
+podcast_tags: ["tag 1", "tag 2"]
 explicit: "no"
 draft: false
 ---
