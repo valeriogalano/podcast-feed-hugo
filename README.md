@@ -6,4 +6,6 @@ Run following command to start the server:
 ```bash
 $ hugo server -D
 ```
-See the result at http://localhost:1313
+See the result at 
+ * http://localhost:1313/index.xml (Podcast feed)
+ * http://localhost:1313/sitemap.xml (Sitemap)
