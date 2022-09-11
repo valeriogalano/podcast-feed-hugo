@@ -6,7 +6,7 @@ date: 2022-08-27T05:25:00+10:00
 audio: "/podcast/first-episode.mp3"
 audio_duration: 14:39
 audio_size: 14076118
-authors: ["Author Name"]
+authors: ["Author Name 1", "Author Name 2"]
 images: ["/img/example-first-episode-image.jpg"]
 series: ["My Podcast"]
 podcast_tags: ["tag 1", "tag 2"]
