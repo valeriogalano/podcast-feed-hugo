@@ -19,11 +19,21 @@
     <lastBuildDate>{{ dateFormat "Mon, 2 Jan 2006 15:04:05 -0700" .Date }}</lastBuildDate>
     <copyright>{{ .Site.Params.Podcast.copyright | plainify }}</copyright>
     <itunes:subtitle>{{ .Site.Params.Podcast.subtitle }}</itunes:subtitle>
-    <itunes:author>{{ .Site.Params.Podcast.author }}</itunes:author>
+    <itunes:author>
+      {{- range $index, $key:= .Site.Params.Podcast.authors -}}
+        {{- if $index }}, {{ end -}}
+        {{- if gt (len $key) 0 }}{{ $key }}{{ end -}}
+      {{- end -}}
+    </itunes:author>
     <itunes:summary>{{ .Site.Params.Podcast.summary | plainify }}</itunes:summary>
     <description>{{ .Site.Params.Podcast.summary | plainify }}</description>
     <itunes:owner>
-      <itunes:name>{{ .Site.Params.Podcast.author }}</itunes:name>
+      <itunes:name>
+        {{- range $index, $key:= .Site.Params.Podcast.authors -}}
+          {{- if $index }}, {{ end -}}
+          {{- if gt (len $key) 0 }}{{ $key }}{{ end -}}
+        {{- end -}}
+      </itunes:name>
       <itunes:email>{{ .Site.Params.Podcast.email }}</itunes:email>
     </itunes:owner>
     <itunes:image href="{{.Site.BaseURL}}{{ .Site.Params.Podcast.image }}" />
