@@ -2,7 +2,7 @@
 This is a Hugo module that generates a podcast feed.
 
 ## Demo
- * https://valeriogalano.github.io/podcast-feed-hugo/index.xml (Podcast feed)
+ * https://valeriogalano.github.io/podcast-feed-hugo/podcast/index.xml (Podcast feed)
  * https://valeriogalano.github.io/podcast-feed-hugo/sitemap.xml (Sitemap)
 
 ## Execute
