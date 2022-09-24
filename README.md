@@ -11,5 +11,5 @@ Run following command to start the server:
 $ hugo server -D
 ```
 See the result at 
- * http://localhost:1313/index.xml (Podcast feed)
+ * http://localhost:1313/podcast/index.xml (Podcast feed)
  * http://localhost:1313/sitemap.xml (Sitemap)
