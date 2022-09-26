@@ -62,6 +62,10 @@
       </itunes:author>
       <itunes:summary>{{ .Summary | plainify }}</itunes:summary>
       <itunes:explicit>{{ .Params.explicit }}</itunes:explicit>
+      <itunes:episodeType>{{ .Params.episode_type | default "full" }}</itunes:episodeType>
+      {{- if .Params.season -}}
+      <itunes:season>{{ .Params.season }}</itunes:season>
+      {{- end -}}
       {{- if .Params.podcast_tag -}}
       <itunes:keywords>
         {{- range $index, $key:= .Params.podcast_tag -}}

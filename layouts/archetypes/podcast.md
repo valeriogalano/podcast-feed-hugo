@@ -11,5 +11,7 @@ images: [""]
 series: [""]
 podcast_tag: [""]
 explicit: "no"
+episode_type: "full"
+season: ""
 draft: true
 ---
