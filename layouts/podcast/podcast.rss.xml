@@ -25,6 +25,7 @@
         {{- if gt (len $key) 0 }}{{ $key }}{{ end -}}
       {{- end -}}
     </itunes:author>
+    <itunes:type>{{ .Site.Params.Podcast.itunes_type }}</itunes:type>
     <itunes:summary>{{ .Site.Params.Podcast.summary | plainify }}</itunes:summary>
     <description>{{ .Site.Params.Podcast.summary | plainify }}</description>
     <itunes:owner>
