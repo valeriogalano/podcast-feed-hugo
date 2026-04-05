@@ -1,0 +1,43 @@
+{{- $episodeBase := .File.BaseFileName -}}
+{{- $sbPath := printf "assets/soundbites/%s.txt" $episodeBase -}}
+{{- if fileExists $sbPath -}}
+    {{- $content := readFile $sbPath -}}
+    {{- $lines := split ($content | chomp) "\n" -}}
+    {{- range $lines -}}
+        {{- $line := . -}}
+        {{- if gt (len ($line | plainify)) 0 -}}
+            {{/* Split primario: TAB; fallback: spazio singolo */}}
+            {{- $parts := split $line "\t" -}}
+            {{- if lt (len $parts) 3 -}}
+                {{- $line = replaceRE " +" " " $line -}}
+                {{- $sp := split $line " " -}}
+                {{- if ge (len $sp) 3 -}}
+                    {{- $parts = (slice (index $sp 0) (index $sp 1) (delimit (after 2 $sp) " ")) -}}
+                {{- end -}}
+            {{- end -}}
+            {{- if ge (len $parts) 3 -}}
+                {{- $startStr := trim (index $parts 0) " " -}}
+                {{- $endStr   := trim (index $parts 1) " " -}}
+                {{- $title    := (index $parts 2) -}}
+                {{- if gt (len $parts) 3 -}}
+                    {{- $title = delimit (after 2 $parts) "\t" -}}
+                {{- end -}}
+                {{- $title = replace $title "\t" " " -}}
+                {{- $start    := float $startStr -}}
+                {{- $end      := float $endStr -}}
+                {{- $duration := sub $end $start -}}
+                {{- if gt $duration 0 -}}
+                    {{- $startAttr := printf "%.0f" $start -}}
+                    {{- if or (gt (sub $start (math.Floor $start)) 0) (gt (sub $duration (math.Floor $duration)) 0) -}}
+                        {{- $startAttr = printf "%.2f" $start -}}
+                    {{- end -}}
+                    {{- $durAttr := printf "%.0f" $duration -}}
+                    {{- if or (gt (sub $start (math.Floor $start)) 0) (gt (sub $duration (math.Floor $duration)) 0) -}}
+                        {{- $durAttr = printf "%.2f" $duration -}}
+                    {{- end -}}
+                    <podcast:soundbite startTime="{{ $startAttr }}" duration="{{ $durAttr }}">{{ $title }}</podcast:soundbite>
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}

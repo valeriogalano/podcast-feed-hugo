@@ -1,0 +1,125 @@
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:podcast="https://podcastindex.org/namespace/1.0">
+  {{- $cdnBase    := .Site.Params.Podcast.cdn_base_url | default .Site.Params.Podcast.audio_base_url -}}
+  {{- $cdnTracked := .Site.Params.Podcast.cdn_tracked_base_url | default $cdnBase -}}
+  <channel>
+    <atom:link href="{{ .Site.BaseURL }}podcast/index.xml" rel="self" type="application/rss+xml" />
+    {{- with .Site.Params.Podcast.updateFrequency }}
+    <podcast:updateFrequency rrule="FREQ={{ . | upper }}">{{ . | title }}</podcast:updateFrequency>
+    {{- end }}
+    <title>{{ .Site.Params.Podcast.title }}</title>
+    <link>{{ .Site.BaseURL }}</link>
+    <language>{{ .Site.LanguageCode }}</language>
+    <category>{{ .Site.Params.Podcast.category }}</category>
+    <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</lastBuildDate>
+    <copyright>{{ .Site.Params.Podcast.copyright | plainify }}</copyright>
+    <image>
+      <url>{{ $cdnBase }}{{ .Site.Params.Podcast.image }}</url>
+      <title>{{ .Site.Params.Podcast.title }}</title>
+      <link>{{ .Site.BaseURL }}</link>
+    </image>
+    <description>{{ .Site.Params.Podcast.summary | plainify }}</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <itunes:subtitle>{{ .Site.Params.Podcast.subtitle }}</itunes:subtitle>
+    <itunes:author>
+      {{- range $i, $a := .Site.Params.Podcast.authors -}}
+        {{- if $i }}, {{ end -}}{{ $a }}
+      {{- end -}}
+    </itunes:author>
+    <itunes:type>{{ .Site.Params.Podcast.itunes_type }}</itunes:type>
+    <itunes:summary>{{ .Site.Params.Podcast.summary | htmlEscape }}</itunes:summary>
+    <itunes:owner>
+      <itunes:name>
+        {{- range $i, $a := .Site.Params.Podcast.authors -}}
+          {{- if $i }}, {{ end -}}{{ $a }}
+        {{- end -}}
+      </itunes:name>
+      <itunes:email>{{ .Site.Params.Podcast.email }}</itunes:email>
+    </itunes:owner>
+    <itunes:image href="{{ $cdnBase }}{{ .Site.Params.Podcast.image }}" />
+    <itunes:category text="{{ .Site.Params.Podcast.category }}">
+      {{- with .Site.Params.Podcast.sub_category }}
+      <itunes:category text="{{ . }}" />
+      {{- end }}
+    </itunes:category>
+    <itunes:block>no</itunes:block>
+    <itunes:explicit>{{ .Site.Params.Podcast.explicit }}</itunes:explicit>
+    {{- with .Site.Params.Podcast.funding_url }}
+    <podcast:funding url="{{ . }}">{{ $.Site.Params.Podcast.funding_text }}</podcast:funding>
+    {{- end }}
+    {{- with .Site.Params.Podcast.guid }}
+    <podcast:guid>{{ . }}</podcast:guid>
+    {{- end }}
+    {{- $pages := where .Data.Pages "Params.layout" "episode" -}}
+    {{- if not $pages -}}{{- $pages = .Data.Pages -}}{{- end -}}
+    {{- $limit := .Site.Config.Services.RSS.Limit -}}
+    {{- if ge $limit 1 -}}{{- $pages = $pages | first $limit -}}{{- end -}}
+    {{- range $pages }}
+    {{- $arr      := split .Params.audio "." -}}
+    {{- $audioExt := index $arr (sub (len $arr) 1) -}}
+    {{- $audioSize := 1 -}}
+    {{- if .Params.audio_size }}{{- $audioSize = int .Params.audio_size -}}{{- end }}
+    <item>
+      <title>{{ .Params.title }}{{ with .Params.subtitle }} ({{ . }}){{ end }}</title>
+      <enclosure url="{{ $cdnTracked }}{{ .Params.audio }}" length="{{ $audioSize }}" type="audio/{{ $audioExt }}" />
+      <guid>{{ $cdnBase }}{{ .Params.audio }}</guid>
+      {{- partial "podcast/soundbites.html" . }}
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      {{- $noop := .Content }}
+      <description>{{ printf "<![CDATA[%s]]>" .Content | safeHTML }}</description>
+      <content:encoded>{{ printf "<![CDATA[%s]]>" .Content | safeHTML }}</content:encoded>
+      <itunes:author>
+        {{- range $i, $a := .Params.authors -}}
+          {{- if $i }}, {{ end -}}{{ $a }}
+        {{- end -}}
+      </itunes:author>
+      <itunes:summary>{{ .Summary | htmlEscape | plainify }}</itunes:summary>
+      <itunes:explicit>{{ .Params.explicit }}</itunes:explicit>
+      <itunes:episodeType>{{ .Params.episode_type | default "full" }}</itunes:episodeType>
+      {{- with .Params.number }}
+      <itunes:episode>{{ . }}</itunes:episode>
+      <podcast:episode>{{ . }}</podcast:episode>
+      {{- end }}
+      {{- with .Params.season }}
+      <itunes:season>{{ . }}</itunes:season>
+      {{- end }}
+      {{- if .Params.tags }}
+      <itunes:keywords>
+        {{- range $i, $t := .Params.tags -}}
+          {{- if $i }}, {{ end -}}{{ $t }}
+        {{- end -}}
+      </itunes:keywords>
+      {{- else if .Params.podcast_tag }}
+      <itunes:keywords>
+        {{- range $i, $t := .Params.podcast_tag -}}
+          {{- if $i }}, {{ end -}}{{ $t }}
+        {{- end -}}
+      </itunes:keywords>
+      {{- end }}
+      {{- with .Params.audio_duration }}<itunes:duration>{{ . }}</itunes:duration>{{ end }}
+      {{- if .Params.image }}
+      <itunes:image href="{{ $cdnBase }}{{ .Params.image }}" />
+      {{- else if .Params.images }}
+      <itunes:image href="{{ index .Params.images 0 | absURL }}" />
+      {{- end }}
+      {{- with .Params.transcript }}
+      {{- $tArr  := split . "." -}}
+      {{- $tExt  := index $tArr (sub (len $tArr) 1) -}}
+      {{- $tMime := "text/plain" -}}
+      {{- if eq $tExt "srt" }}{{- $tMime = "application/x-subrip" -}}{{- end }}
+      {{- if eq $tExt "vtt" }}{{- $tMime = "text/vtt" -}}{{- end }}
+      {{- if eq $tExt "json" }}{{- $tMime = "application/json" -}}{{- end }}
+      <podcast:transcript url="{{ $cdnBase }}{{ . }}" type="{{ $tMime }}" language="{{ $.Site.LanguageCode }}" rel="captions" />
+      {{- end }}
+      {{- with .Params.chapters }}
+      <podcast:chapters url="{{ $cdnBase }}{{ . }}" type="application/json+chapters" />
+      {{- end }}
+    </item>
+    {{- end }}
+  </channel>
+</rss>
