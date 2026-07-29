@@ -2,6 +2,11 @@ baseURL = ""
 languageCode = "it-it"
 title = ""
 
+# This demo site consumes the module from the repository root.
+[module]
+  [[module.imports]]
+    path = "github.com/valeriogalano/podcast-feed-hugo"
+
 [params]
   author = ""
 
@@ -13,22 +18,22 @@ title = ""
     email        = "example@example.com"
     image        = "img/podcast-logo.png"
 
-    # URL base del CDN per audio, immagini, trascrizioni e capitoli
+    # Base CDN URL for audio, images, transcripts, and chapters
     cdn_base_url = "https://cdn.example.com/podcast/"
 
-    # URL con tracking analytics (es. OP3). Se omesso, viene usato cdn_base_url.
+    # Optional: URL with analytics tracking (e.g. OP3). Falls back to cdn_base_url.
     cdn_tracked_base_url = ""
 
-    # GUID univoco del podcast. Generalo su https://podcastindex.org/
+    # Unique podcast GUID - generate one at https://podcastindex.org/
     guid = ""
 
     copyright   = "Copyright"
     category    = "Technology"
     sub_category = ""
     explicit    = "no"
-    itunes_type = "episodic"   # "episodic" o "serial"
+    itunes_type = "episodic"   # "episodic" or "serial"
 
-    # Frequenza di aggiornamento (valore RRULE FREQ): DAILY, WEEKLY, MONTHLY, YEARLY
+    # Update frequency (RRULE FREQ value): DAILY, WEEKLY, MONTHLY, YEARLY
     updateFrequency = "weekly"
 
     funding_url  = "https://example.com/funding"

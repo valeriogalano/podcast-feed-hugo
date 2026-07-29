@@ -3,7 +3,7 @@ layout: episode
 title: "Example first podcast episode"
 subtitle: "Yay!"
 date: 2022-08-27T05:25:00+10:00
-audio: "/podcast/first-episode.mp3"
+audio_file: "/podcast/first-episode.mp3"
 audio_duration: 14:39
 audio_size: 14076118
 authors: ["Author Name 1", "Author Name 2"]

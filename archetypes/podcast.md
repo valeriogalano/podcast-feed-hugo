@@ -7,7 +7,7 @@ number: ""
 season: ""
 episode_type: "full"
 explicit: "no"
-audio: ""
+audio_file: ""
 audio_duration: "00:00"
 audio_size: 0
 transcript: ""

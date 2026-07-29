@@ -31,6 +31,11 @@ jobs:
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Checkout
         uses: actions/checkout@v4
+      # The demo site imports this repository as a Hugo module, which needs Go.
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -39,11 +44,11 @@ jobs:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run: |
-          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+          hugo --source exampleSite --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./exampleSite/public
 
   deploy:
     environment:

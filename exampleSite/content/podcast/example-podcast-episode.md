@@ -3,7 +3,7 @@ layout: episode
 title: "Example title"
 subtitle: "Example subtitle!"
 date: 2022-10-28T19:34:00+10:00
-audio: "/podcast/example-episode.mp3"
+audio_file: "/podcast/example-episode.mp3"
 audio_duration: 14:39
 audio_size: 14076118
 authors: ["Example Author Name",]

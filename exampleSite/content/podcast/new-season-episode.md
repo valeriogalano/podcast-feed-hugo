@@ -1,17 +1,18 @@
 ---
 layout: episode
-title: "This is a bonus episode"
+title: "New season trailer"
 subtitle: "Yay!"
-date: 2022-09-22T05:25:00+10:00
-audio: "/podcast/bonus-episode.mp3"
-audio_duration: 4:20
-audio_size: 142011
-authors: ["Author Name 1"]
+date: 2022-09-26T05:25:00+10:00
+audio_file: "/podcast/new-season-episode.mp3"
+audio_duration: 1:33
+audio_size: 33511
+authors: ["Author Name 1", "Author Name 3"]
 images: ["/img/example-first-episode-image.jpg"]
 series: ["My Podcast"]
-podcast_tags: ["bonus", "special"]
-episode_type: "bonus"
+podcast_tags: ["trailer", "new season"]
+episode_type: "trailer"
 explicit: "no"
+season: "2"
 draft: false
 ---
 

@@ -5,7 +5,7 @@
 {{- with .Params.subtitle }}<h2 class="post_subtitle">{{ . }}</h2>{{ end -}}
 <div class="post_content">
     <audio controls>
-        <source src="{{ $cdnBase }}{{ .Params.audio }}" type="audio/mpeg">
+        <source src="{{ $cdnBase }}{{ .Params.audio_file }}" type="audio/mpeg">
     </audio>
     {{ .Content }}
 </div>
