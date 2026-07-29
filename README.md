@@ -114,7 +114,7 @@ number: "42"            # episode number (optional)
 season: "2"             # season number (optional)
 episode_type: "full"    # full | bonus | trailer
 explicit: "no"
-audio: "episodes/my-episode.mp3"
+audio: "episodes/my-episode.mp3"   # or ["episodes/my-episode.mp3"], see note below
 audio_duration: "01:23:45"
 audio_size: 0           # file size in bytes
 transcript: "transcripts/srt/my-episode.srt"   # optional: .srt .vtt .json
@@ -126,6 +126,13 @@ tags:       ["tag1", "tag2"]
 draft: true
 ---
 ```
+
+> **Note on `audio`**
+> `audio` is a reserved Hugo front matter field: Hugo's embedded `_internal/opengraph.html`
+> template iterates over it and fails with `range can't iterate over ...` when it is a string.
+> If your site includes that template, declare the field as a list:
+> `audio: ["episodes/my-episode.mp3"]`.
+> Both forms work with this module; only the first element of the list is used.
 
 ### Soundbites
 

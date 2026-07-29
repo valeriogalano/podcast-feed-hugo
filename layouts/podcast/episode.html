@@ -1,11 +1,14 @@
 {{- $cdnBase := .Site.Params.Podcast.cdn_base_url | default .Site.Params.Podcast.audio_base_url -}}
 {{- $date := dateFormat "02. January 2006" .Date -}}
+{{- /* "audio" is a reserved Hugo front matter field: the embedded opengraph template expects a list, so accept both forms */ -}}
+{{- $audio := .Params.audio -}}
+{{- if reflect.IsSlice $audio }}{{ $audio = index $audio 0 }}{{ end -}}
 <p class="post_date pale">{{ $date }}</p>
 <h1 class="post_title">{{ .Title }}</h1>
 {{- with .Params.subtitle }}<h2 class="post_subtitle">{{ . }}</h2>{{ end -}}
 <div class="post_content">
     <audio controls>
-        <source src="{{ $cdnBase }}{{ .Params.audio }}" type="audio/mpeg">
+        <source src="{{ $cdnBase }}{{ $audio }}" type="audio/mpeg">
     </audio>
     {{ .Content }}
 </div>

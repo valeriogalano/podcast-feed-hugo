@@ -59,14 +59,17 @@
     {{- $limit := .Site.Config.Services.RSS.Limit -}}
     {{- if ge $limit 1 -}}{{- $pages = $pages | first $limit -}}{{- end -}}
     {{- range $pages }}
-    {{- $arr      := split .Params.audio "." -}}
+    {{- /* "audio" is a reserved Hugo front matter field: the embedded opengraph template expects a list, so accept both forms */ -}}
+    {{- $audio := .Params.audio -}}
+    {{- if reflect.IsSlice $audio }}{{ $audio = index $audio 0 }}{{ end -}}
+    {{- $arr      := split $audio "." -}}
     {{- $audioExt := index $arr (sub (len $arr) 1) -}}
     {{- $audioSize := 1 -}}
     {{- if .Params.audio_size }}{{- $audioSize = int .Params.audio_size -}}{{- end }}
     <item>
       <title>{{ .Params.title }}{{ with .Params.subtitle }} ({{ . }}){{ end }}</title>
-      <enclosure url="{{ $cdnTracked }}{{ .Params.audio }}" length="{{ $audioSize }}" type="audio/{{ $audioExt }}" />
-      <guid>{{ $cdnBase }}{{ .Params.audio }}</guid>
+      <enclosure url="{{ $cdnTracked }}{{ $audio }}" length="{{ $audioSize }}" type="audio/{{ $audioExt }}" />
+      <guid>{{ $cdnBase }}{{ $audio }}</guid>
       {{- partial "podcast/soundbites.html" . }}
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>

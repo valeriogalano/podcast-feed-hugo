@@ -3,7 +3,7 @@ layout: episode
 title: "This is a bonus episode"
 subtitle: "Yay!"
 date: 2022-09-22T05:25:00+10:00
-audio: "/podcast/bonus-episode.mp3"
+audio: ["/podcast/bonus-episode.mp3"]
 audio_duration: 4:20
 audio_size: 142011
 authors: ["Author Name 1"]
