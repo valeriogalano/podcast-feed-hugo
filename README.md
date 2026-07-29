@@ -1,5 +1,7 @@
 # podcast-feed-hugo
 
+> **Vibe Coding experiment** — This project was built through iterative, AI-assisted development where the human steers intent and the AI writes most of the code. It works, it's tested, but it is first and foremost an experiment. Expect rough edges, quick evolution, and the occasional surprise. Issues and PRs are welcome.
+
 A Hugo module that generates a standards-compliant podcast RSS feed, supporting:
 
 - **iTunes / Apple Podcasts** namespace
