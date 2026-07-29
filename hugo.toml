@@ -1,0 +1,11 @@
+# Solo i vincoli del modulo: nessun mount esplicito, così restano quelli di
+# default che espongono layouts/ e archetypes/, e nessuna configurazione di
+# contenuto, che verrebbe ereditata da chi importa il modulo.
+# La demo vive in exampleSite/, che non è una directory standard e quindi
+# non viene montata.
+
+[module]
+  [module.hugoVersion]
+    # .Site.Language.Locale, usato in layouts/podcast/list.rss.xml, esiste
+    # da Hugo v0.158.0 (dove .Site.LanguageCode è stato deprecato).
+    min = "0.158.0"
