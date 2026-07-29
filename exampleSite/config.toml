@@ -1,5 +1,5 @@
 baseURL = ""
-languageCode = "it-it"
+locale = "it-it"
 title = ""
 
 # This demo site consumes the module from the repository root.

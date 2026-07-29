@@ -13,7 +13,7 @@
     {{- end }}
     <title>{{ .Site.Params.Podcast.title }}</title>
     <link>{{ .Site.BaseURL }}</link>
-    <language>{{ .Site.LanguageCode }}</language>
+    <language>{{ .Site.Language.Locale }}</language>
     <category>{{ .Site.Params.Podcast.category }}</category>
     <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</lastBuildDate>
     <copyright>{{ .Site.Params.Podcast.copyright | plainify }}</copyright>
@@ -114,7 +114,7 @@
       {{- if eq $tExt "srt" }}{{- $tMime = "application/x-subrip" -}}{{- end }}
       {{- if eq $tExt "vtt" }}{{- $tMime = "text/vtt" -}}{{- end }}
       {{- if eq $tExt "json" }}{{- $tMime = "application/json" -}}{{- end }}
-      <podcast:transcript url="{{ $cdnBase }}{{ . }}" type="{{ $tMime }}" language="{{ $.Site.LanguageCode }}" rel="captions" />
+      <podcast:transcript url="{{ $cdnBase }}{{ . }}" type="{{ $tMime }}" language="{{ $.Site.Language.Locale }}" rel="captions" />
       {{- end }}
       {{- with .Params.chapters }}
       <podcast:chapters url="{{ $cdnBase }}{{ . }}" type="application/json+chapters" />

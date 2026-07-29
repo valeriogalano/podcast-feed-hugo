@@ -6,6 +6,7 @@ date: 2022-09-22T05:25:00+10:00
 audio_file: "/podcast/bonus-episode.mp3"
 audio_duration: 4:20
 audio_size: 142011
+transcript: "transcripts/bonus-episode.srt"
 authors: ["Author Name 1"]
 images: ["/img/example-first-episode-image.jpg"]
 series: ["My Podcast"]
